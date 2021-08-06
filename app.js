@@ -137,9 +137,13 @@ async function main() {
     function getPseudoFromInput() {
         let nom = document.getElementById("fpseudo").value;
         if (nom != "") {
-            let pseudo = nom.replace("#", "%23");
+            let pseudo = capitalize(nom.replace("#", "%23"));
             displayFusionCarteFusion(pseudo);
         }
+    }
+
+    function capitalize(s) {
+        return s && s[0].toUpperCase() + s.slice(1);
     }
 }
 main();
