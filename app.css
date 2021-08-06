@@ -56,9 +56,15 @@ select {
 
 .wrapper-img {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(10, 1fr);
     text-align: center;
     border-bottom: #000 2px solid;
+}
+
+@media screen and (max-width: 1200px) {
+    .wrapper-img {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 
 .wrapper h1 {
