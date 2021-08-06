@@ -78,7 +78,6 @@ async function main() {
      * @returns tableau de carte
      */
     function rangerTableauDeFusion(tableauJson, inventaire) {
-        console.log(inventaire);
         let fusion = [];
         let current = null;
         for (var i = 0; i < tableauJson.length; i++) {
@@ -159,8 +158,8 @@ async function main() {
     function getPseudoFromInput() {
         let nom = document.getElementById("fpseudo").value;
         if (nom != "") {
-            this.pseudo = nom.replace("#", "%23");
-            displayFusionCarteFusion(this.pseudo);
+            let pseudo = nom.replace("#", "%23");
+            displayFusionCarteFusion(pseudo);
         }
     }
 }

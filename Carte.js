@@ -74,9 +74,7 @@ export class Carte {
                 //current = listFusion[i].identifier;
                 cnt++;
             }
-            //console.log("current = " + current + " list = " + listFusion[i].identifier + " cnt = " + cnt);
         }
-        //console.log(current + ' comes --> ' + cnt + ' times');
         return cnt;
     }
 }
