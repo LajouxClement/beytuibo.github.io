@@ -19,26 +19,6 @@ async function main() {
     }
 
     function displayFusion(tableau) {
-        /*
-        for (var i = 0; i < tableau.length; i++) {
-            if (!tableau[i].returnIsGolden()) {
-                let divElement = document.createElement("div");
-                divElement.className = "wrapper-img"
-                tableau[i].appendTo(divElement)
-                for (var y = 0; y < tableau[i].listFusion.length; y++) {
-                    let identifierNow = tableau[i].listFusion[y].identifier;
-                    let identifierAfter = "";
-                    if (tableau[i].listFusion[y + 1] !== undefined) {
-                        identifierAfter = tableau[i].listFusion[y + 1].identifier;
-                    }
-                    if (identifierNow != identifierAfter) {
-                        tableau[i].afficherFusion(divElement, y);
-                    }
-                }
-                document.getElementById("afficheur").appendChild(divElement);
-            }
-        }
-        */
         for (var i = 0; i < tableau.length; i++) {
             let divElement = document.createElement("div");
             divElement.className = "wrapper-img"
@@ -153,7 +133,6 @@ async function main() {
     /**
      * fonction qui récupère le text du champ pseudo et qui modifie la variable local;
      */
-    let pseudo = "";
 
     function getPseudoFromInput() {
         let nom = document.getElementById("fpseudo").value;
