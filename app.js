@@ -166,7 +166,7 @@ async function main() {
 
     let nom = document.getElementById("autoComplete");
     let once = false;
-    nom.addEventListener("keypress", retourUrl);
+    nom.addEventListener("keyup", retourUrl);
 
 
     function retourUrl() {
