@@ -165,14 +165,12 @@ async function main() {
 
 
     let nom = document.getElementById("autoComplete");
+    let once = false;
     nom.addEventListener("keypress", retourUrl);
 
 
     function retourUrl() {
         let divForm = document.getElementById("formulaire");
-        while (divForm.lastElementChild) {
-            divForm.lastElementChild.remove();
-        }
         let pseudo = document.getElementById("autoComplete").value;
         if (!pseudo) {
             pseudo = "a";
@@ -181,16 +179,26 @@ async function main() {
         let word = retourPseudo(httpGet(urlword));
 
         if (word.length == 0) {
-            let pseudoElement = document.createElement('p');
-            pseudoElement.innerHTML = "Plus de lettre";
-            divForm.appendChild(pseudoElement);
+            if (!this.once) {
+                while (divForm.lastElementChild) {
+                    divForm.lastElementChild.remove();
+                }
+                let pseudoElement = document.createElement('p');
+                pseudoElement.innerHTML = "Plus de lettre";
+                divForm.appendChild(pseudoElement);
+                this.once = true;
+            }
         } else {
+            while (divForm.lastElementChild) {
+                divForm.lastElementChild.remove();
+            }
             for (var i = 0; i < word.length; i++) {
                 let pseudoElement = document.createElement('p');
                 pseudoElement.innerHTML = word[i];
                 pseudoElement.classList.add('pseudo-button');
                 divForm.appendChild(pseudoElement);
             }
+            this.once = false;
         }
     }
 
