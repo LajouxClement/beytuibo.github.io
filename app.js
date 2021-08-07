@@ -4,14 +4,8 @@ import { Carte } from './Carte.js';
 async function main() {
 
     function displayFusionCarteFusion(pseudo) {
-        let afficheur = document.getElementById("afficheur");
-        while (afficheur.lastElementChild) {
-            afficheur.lastElementChild.remove();
-        }
-        let divForm = document.getElementById("formulaire");
-        while (divForm.lastElementChild) {
-            divForm.lastElementChild.remove();
-        }
+        document.getElementById("afficheur").innerHTML = ""
+        document.getElementById("formulaire").innerHTML = "";
 
         let urlInventaireUser = "https://zunivers-api.zerator.com/public/inventory/" + pseudo;
         let inventaire = rangerTableauDeCarte(httpGet(urlInventaireUser));
@@ -166,7 +160,7 @@ async function main() {
 
     let nom = document.getElementById("autoComplete");
     let once = false;
-    nom.addEventListener("keyup", retourUrl);
+    nom.addEventListener("keydown", retourUrl);
 
 
     function retourUrl() {
@@ -175,23 +169,20 @@ async function main() {
         if (!pseudo) {
             pseudo = "a";
         }
+
         let urlword = 'https://zunivers-api.zerator.com/public/user/autocomplete/' + pseudo;
         let word = retourPseudo(httpGet(urlword));
 
         if (word.length == 0) {
             if (!this.once) {
-                while (divForm.lastElementChild) {
-                    divForm.lastElementChild.remove();
-                }
+                divForm.innerHTML = "";
                 let pseudoElement = document.createElement('p');
                 pseudoElement.innerHTML = "Plus de lettre";
                 divForm.appendChild(pseudoElement);
                 this.once = true;
             }
         } else {
-            while (divForm.lastElementChild) {
-                divForm.lastElementChild.remove();
-            }
+            divForm.innerHTML = "";
             for (var i = 0; i < word.length; i++) {
                 let pseudoElement = document.createElement('p');
                 pseudoElement.innerHTML = word[i];
@@ -200,6 +191,7 @@ async function main() {
             }
             this.once = false;
         }
+
     }
 
     const container = document.querySelector('#formulaire');
