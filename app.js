@@ -8,6 +8,10 @@ async function main() {
         while (afficheur.lastElementChild) {
             afficheur.lastElementChild.remove();
         }
+        let divForm = document.getElementById("formulaire");
+        while (divForm.lastElementChild) {
+            divForm.lastElementChild.remove();
+        }
 
         let urlInventaireUser = "https://zunivers-api.zerator.com/public/inventory/" + pseudo;
         let inventaire = rangerTableauDeCarte(httpGet(urlInventaireUser));
@@ -23,7 +27,12 @@ async function main() {
             let divElement = document.createElement("div");
             divElement.className = "wrapper-img"
             for (var y = 0; y < tableau[i].length; y++) {
-                tableau[i][y].appendTo(divElement);
+                if (y == 0) {
+                    tableau[i][y].appendTo(divElement, true);
+                } else {
+                    tableau[i][y].appendTo(divElement);
+                }
+
             }
             document.getElementById("afficheur").appendChild(divElement);
         }
@@ -135,7 +144,7 @@ async function main() {
      */
 
     function getPseudoFromInput() {
-        let nom = document.getElementById("fpseudo").value;
+        let nom = document.getElementById("autoComplete").value;
         if (nom != "") {
             let pseudo = capitalize(nom.replace("#", "%23"));
             displayFusionCarteFusion(pseudo);
@@ -145,5 +154,56 @@ async function main() {
     function capitalize(s) {
         return s && s[0].toUpperCase() + s.slice(1);
     }
+
+    function retourPseudo(word) {
+        let mots = [];
+        for (var i = 0; i < word.length; i++) {
+            mots.push(word[i].discordUserName);
+        }
+        return mots;
+    }
+
+
+    let nom = document.getElementById("autoComplete");
+    nom.addEventListener("keypress", retourUrl);
+
+
+    function retourUrl() {
+        let divForm = document.getElementById("formulaire");
+        while (divForm.lastElementChild) {
+            divForm.lastElementChild.remove();
+        }
+        let pseudo = document.getElementById("autoComplete").value;
+        if (!pseudo) {
+            pseudo = "a";
+        }
+        let urlword = 'https://zunivers-api.zerator.com/public/user/autocomplete/' + pseudo;
+        let word = retourPseudo(httpGet(urlword));
+
+        if (word.length == 0) {
+            let pseudoElement = document.createElement('p');
+            pseudoElement.innerHTML = "Plus de lettre";
+            divForm.appendChild(pseudoElement);
+        } else {
+            for (var i = 0; i < word.length; i++) {
+                let pseudoElement = document.createElement('p');
+                pseudoElement.innerHTML = word[i];
+                pseudoElement.classList.add('pseudo-button');
+                divForm.appendChild(pseudoElement);
+            }
+        }
+    }
+
+    const container = document.querySelector('#formulaire');
+
+    // Click handler for entire DIV container
+    container.addEventListener('click', function(e) {
+        // But only alert for elements that have an alert-button class
+        if (e.target.classList.contains('pseudo-button')) {
+            let pseudo = document.getElementById("autoComplete");
+            pseudo.value = e.target.innerHTML;
+            console.log(e.target.innerHTML);
+        }
+    });
 }
 main();

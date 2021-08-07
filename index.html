@@ -9,7 +9,7 @@
     <title>Zunivers</title>
     <link rel="stylesheet" href="app.css">
     <script type="module" src="app.js" defer></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/autoComplete.min.js"></script>
 </head>
 
 <body>
@@ -17,8 +17,9 @@
         <main class="main">
             <div class="form">
                 <label for="fpseudo">Pseudo Discord</label>
-                <input type="text" id="fpseudo" name="pseudo" placeholder="Ton Pseudo avec le # ...">
+                <input type="text" id="autoComplete" name="pseudo" placeholder="Ton Pseudo avec le # ...">
                 <button id="envoi">Submit</button>
+                <div id="formulaire"></div>
             </div>
         </main>
         <div id="afficheur">

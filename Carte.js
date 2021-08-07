@@ -21,7 +21,7 @@ export class Carte {
     returnIsGolden() {
         return this.isGolden;
     }
-    appendTo(element) {
+    appendTo(element, first = false) {
         /**
          * div qui prend tout
          */
@@ -49,7 +49,7 @@ export class Carte {
         /**
          * text de quantité
          */
-        if (typeof this.quantityNeeded != 'undefined') {
+        if (!first) {
             let quantiteElement = document.createElement('div');
             quantiteElement.className = "text";
             quantiteElement.innerHTML = this.quantity + "/" + this.quantityNeeded;

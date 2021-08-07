@@ -137,3 +137,11 @@ css image
     transform: translate(-50%, -50%);
     width: 100%;
 }
+
+.pseudo-button {
+    cursor: pointer;
+}
+
+#formulaire {
+    width: 100px;
+}
