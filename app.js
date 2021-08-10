@@ -164,7 +164,9 @@ async function main() {
 
 
     function retourUrl() {
-        let divForm = document.getElementById("formulaire");
+
+
+        let divForm = document.getElementById("menu-deroulant");
         let pseudo = document.getElementById("autoComplete").value;
         if (!pseudo) {
             pseudo = "a";
@@ -176,25 +178,31 @@ async function main() {
         if (word.length == 0) {
             if (!this.once) {
                 divForm.innerHTML = "";
-                let pseudoElement = document.createElement('p');
-                pseudoElement.innerHTML = "Plus de lettre";
-                divForm.appendChild(pseudoElement);
+                divForm.style.display = "none";
                 this.once = true;
             }
         } else {
             divForm.innerHTML = "";
+            divForm.style.removeProperty("display");
             for (var i = 0; i < word.length; i++) {
-                let pseudoElement = document.createElement('p');
-                pseudoElement.innerHTML = word[i];
-                pseudoElement.classList.add('pseudo-button');
-                divForm.appendChild(pseudoElement);
+                let menuDeroulantItem = document.createElement('div');
+                menuDeroulantItem.classList.add("menu-deroulant-item");
+
+                let menuDeroulantItemContent = document.createElement('div');
+                menuDeroulantItemContent.classList.add("menu-deroulant-item-content");
+
+                menuDeroulantItemContent.innerHTML = word[i];
+                menuDeroulantItemContent.classList.add('pseudo-button');
+
+                menuDeroulantItem.appendChild(menuDeroulantItemContent);
+                divForm.appendChild(menuDeroulantItem);
             }
             this.once = false;
         }
 
     }
 
-    const container = document.querySelector('#formulaire');
+    const container = document.querySelector('#menu-deroulant');
 
     // Click handler for entire DIV container
     container.addEventListener('click', function(e) {
@@ -202,7 +210,7 @@ async function main() {
         if (e.target.classList.contains('pseudo-button')) {
             let pseudo = document.getElementById("autoComplete");
             pseudo.value = e.target.innerHTML;
-            console.log(e.target.innerHTML);
+            container.style.display = "none";
         }
     });
 }
