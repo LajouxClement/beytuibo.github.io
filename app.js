@@ -140,13 +140,9 @@ async function main() {
     function getPseudoFromInput() {
         let nom = document.getElementById("autoComplete").value;
         if (nom != "") {
-            let pseudo = capitalize(nom.replace("#", "%23"));
+            let pseudo = nom.replace("#", "%23");
             displayFusionCarteFusion(pseudo);
         }
-    }
-
-    function capitalize(s) {
-        return s && s[0].toUpperCase() + s.slice(1);
     }
 
     function retourPseudo(word) {
