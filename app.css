@@ -152,6 +152,7 @@ css image
     width: 100%;
     background-color: #1e1e1e;
     color: #fff;
+    z-index: 10;
 }
 
 .menu-deroulant-item {
