@@ -156,12 +156,18 @@ async function main() {
 
     let nom = document.getElementById("autoComplete");
     let once = false;
-    nom.addEventListener("keydown", retourUrl);
+
+    let typingTimer; //timer identifier
+    let doneTypingInterval = 150; //time in ms (0.15 seconds)
+    nom.addEventListener("keyup", () => {
+        clearTimeout(typingTimer);
+        if (nom.value) {
+            typingTimer = setTimeout(retourUrl, doneTypingInterval);
+        }
+    });
 
 
     function retourUrl() {
-
-
         let divForm = document.getElementById("menu-deroulant");
         let pseudo = document.getElementById("autoComplete").value;
         if (!pseudo) {
