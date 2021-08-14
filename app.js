@@ -14,6 +14,8 @@ async function main() {
         let fusion = rangerTableauDeFusion(httpGet(urlFusion), inventaire);
         displayFusion(fusion);
 
+
+
     }
 
     function displayFusion(tableau) {
@@ -126,6 +128,13 @@ async function main() {
         xmlHttp.send(null);
         return JSON.parse(xmlHttp.responseText);
     }
+
+    async function fetchJSON(url) {
+        const response = await fetch(url);
+        const list = await response.json();
+        return list;
+    }
+
 
     /**
      * on ecoute l'event onclick sur le bouton

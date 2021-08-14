@@ -26,10 +26,10 @@ export class Carte {
          * div qui prend tout
          */
         let overlayElement = document.createElement("div");
-        if (this.quantity == 0) {
-            overlayElement.className = "overlay-image-gray"
-        } else {
+        if (this.quantity >= this.quantityNeeded) {
             overlayElement.className = "overlay-image"
+        } else {
+            overlayElement.className = "overlay-image-gray"
         }
 
         /**
